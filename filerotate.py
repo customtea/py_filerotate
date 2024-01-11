@@ -111,22 +111,34 @@ class FileRotate():
         """
         self.__nextopen()
     
-    def write(self, *__s: str):
+    def write(self, *__s: str, flush=False):
         """write string
+        Parameters
+        ----------
+        __s : str
+            strings
+        flush : bool, optional
+            File Write and Flush, by default False
         """
         self.__rotate_check()
         self.__current_file.write(*__s)
+        if flush:
+            self.__current_file.flush()
 
-    def writelines(self, __lines: typing.Iterable[str]):
+    def writelines(self, __lines: typing.Iterable[str], *, flush=False):
         """write iterable string
 
         Parameters
         ----------
         __lines : Iterable[str]
             strings
+        flush : bool, optional
+            File Write and Flush, by default False
         """
         self.__rotate_check()
         self.__current_file.writelines(__lines)
+        if flush:
+            self.__current_file.flush()
     
     def writerow(self, row: typing.Iterable[typing.Any]):
         """write csv
