@@ -111,6 +111,11 @@ class FileRotate():
         """
         self.__nextopen()
     
+    def flush(self):
+        """flush
+        """
+        self.__current_file.flush()
+    
     def write(self, *__s: str, flush=False):
         """write string
         Parameters
