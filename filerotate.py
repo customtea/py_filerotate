@@ -16,7 +16,7 @@ class FileRotate():
     pathstring:str = "#YYYY##MM##DD#_#hh##mm##ss#.txt",
     *,
     csv_mode: bool = False,
-    is_binary: bool = False,
+    bin_mode: bool = False,
     ) -> None:
         """init
 
@@ -36,14 +36,15 @@ class FileRotate():
             #ss# : 2digit Second.
         csv_mode : bool, optional
             CSV Write mode, by default False
-
+        bin_mode : bool, optional
+            Binary File Mode, by default False
         """
         self.__save_dir = Path(savedir)
         self.__set_cron(crontext)
         self.__path_string = pathstring
         self.__current_filename = self.__gen_filepath()
         self.__is_csvmode = csv_mode
-        self.__is_bin = is_binary
+        self.__is_bin = bin_mode
         if self.__is_bin:
             self.__file_mode = "ab"
         else:
