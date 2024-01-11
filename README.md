@@ -14,19 +14,12 @@ croniter
   - [filerotate](#filerotate)
     - [FileRotate Objects](#filerotate-objects)
       - [\_\_init\_\_](#__init__)
-  - [Parameters](#parameters)
       - [force\_rotate](#force_rotate)
       - [flush](#flush)
       - [write](#write)
-  - [Parameters](#parameters-1)
       - [writelines](#writelines)
-  - [Parameters](#parameters-2)
       - [writerow](#writerow)
-  - [Parameters](#parameters-3)
-  - [Notes](#notes)
       - [writerows](#writerows)
-  - [Parameters](#parameters-4)
-  - [Notes](#notes-1)
 
 <a id="filerotate"></a>
 
@@ -56,7 +49,7 @@ def __init__(savedir: str = ".",
 ```
 
 init
-
+```
 Parameters
 ----------
 savedir : str, optional
@@ -75,6 +68,7 @@ csv_mode : bool, optional
     CSV Write mode, by default False
 bin_mode : bool, optional
     Binary File Mode, by default False
+```
 
 <a id="filerotate.FileRotate.force_rotate"></a>
 
@@ -105,12 +99,14 @@ def write(*__s: str, flush=False)
 ```
 
 write string
+```
 Parameters
 ----------
 __s : str
     strings
 flush : bool, optional
     File Write and Flush, by default False
+```
 
 <a id="filerotate.FileRotate.writelines"></a>
 
@@ -122,12 +118,14 @@ def writelines(__lines: typing.Iterable[str], *, flush=False)
 
 write iterable string
 
+```
 Parameters
 ----------
 __lines : Iterable[str]
     strings
 flush : bool, optional
     File Write and Flush, by default False
+```
 
 <a id="filerotate.FileRotate.writerow"></a>
 
@@ -139,6 +137,7 @@ def writerow(row: typing.Iterable[typing.Any])
 
 write csv
 
+```
 Parameters
 ----------
 row : typing.Iterable[typing.Any]
@@ -147,6 +146,7 @@ row : typing.Iterable[typing.Any]
 Notes
 -----
 This Method is CSV Mode ONLY
+```
 
 <a id="filerotate.FileRotate.writerows"></a>
 
@@ -158,6 +158,7 @@ def writerows(rows: typing.Iterable[typing.Iterable[typing.Any]])
 
 write csv rows
 
+```
 Parameters
 ----------
 rows : typing.Iterable[Iterable[Any]]
@@ -166,3 +167,4 @@ rows : typing.Iterable[Iterable[Any]]
 Notes
 -----
 This Method is CSV Mode ONLY
+```
