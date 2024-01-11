@@ -16,6 +16,7 @@ class FileRotate():
     pathstring:str = "#YYYY##MM##DD#_#hh##mm##ss#.txt",
     *,
     csv_mode: bool = False,
+    is_binary: bool = False,
     ) -> None:
         """init
 
@@ -42,6 +43,11 @@ class FileRotate():
         self.__path_string = pathstring
         self.__current_filename = self.__gen_filepath()
         self.__is_csvmode = csv_mode
+        self.__is_bin = is_binary
+        if self.__is_bin:
+            self.__file_mode = "ab"
+        else:
+            self.__file_mode = "a"
         self.__open()
     
     def __set_cron(self, crontext: str):
@@ -71,7 +77,8 @@ class FileRotate():
     
     def __open(self):
         self.__current_filename.parent.mkdir(parents=True, exist_ok=True)
-        self.__current_file = open(self.__current_filename, "a")
+        self.__current_file = open(self.__current_filename, self.__file_mode, encoding="utf8", newline="")
+        self.__current_filesize = self.__current_file.__sizeof__()
         if self.__is_csvmode:
             self.__current_csvwriter = csv.writer(self.__current_file)
 
@@ -86,13 +93,19 @@ class FileRotate():
             self.__current_filename = filepath
             self.__open()
     
-    def __rotate_check(self):
+    def __rotate_conditions(self) -> bool:
         dt_now = datetime.datetime.now()
         if dt_now >= self.__dt_next:
+            return True
+        return False
+    
+    
+    def __rotate_check(self):
+        if self.__rotate_conditions():
             self.__nextopen()
             self.__next_cron()
     
-    def _force_rotate(self):
+    def force_rotate(self):
         """Force Rotation File
         """
         self.__nextopen()
