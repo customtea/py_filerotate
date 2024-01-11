@@ -5,7 +5,7 @@ import csv
 import typing
 
 __author__ = 'customtea (https://github.com/customtea/)'
-__version__ = '1.3.0'
+__version__ = '1.5.0'
 
 class FileRotate():
     """Auto File Rotation
