@@ -45,10 +45,6 @@ class FileRotate():
         self.__current_filename = self.__gen_filepath()
         self.__is_csvmode = csv_mode
         self.__is_bin = bin_mode
-        if self.__is_bin:
-            self.__file_mode = "ab"
-        else:
-            self.__file_mode = "a"
         self.__open()
     
     def __set_cron(self, crontext: str):
@@ -78,7 +74,10 @@ class FileRotate():
     
     def __open(self):
         self.__current_filename.parent.mkdir(parents=True, exist_ok=True)
-        self.__current_file = open(self.__current_filename, self.__file_mode, encoding="utf8", newline="")
+        if self.__is_bin:
+            self.__current_file = open(self.__current_filename, "ab")
+        else:
+            self.__current_file = open(self.__current_filename, "a", encoding="utf8", newline="")
         self.__current_filesize = self.__current_file.__sizeof__()
         if self.__is_csvmode:
             self.__current_csvwriter = csv.writer(self.__current_file)
